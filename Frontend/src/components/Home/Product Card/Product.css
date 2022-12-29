@@ -1,0 +1,22 @@
+a {
+  display: block;
+  text-decoration: none;
+}
+
+.productCard {
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+  margin: 5px 10px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.productCard img {
+  height: 300px;
+  width: 200px;
+}
+
+.productCard p {
+  margin:5px 0;
+}

@@ -1,0 +1,570 @@
+openapi: 3.0.0
+info:
+  title: E-commerce Website Api
+  description: This is e-commerce website api documentation
+  version: 1.0
+  liscence:
+    name: Apache 2.0
+    url: "http://www.apache.org/liscences/LIS"
+  servers:
+    -url: http://localhost:5000
+    description: THis is my local Server
+    -url: http://example.com/
+    description: This is my original URL
+
+#Return Users From get request
+# paths:
+#    /products:
+#      get:
+#        summary: Return All product.
+#        description: This is get request it return all the products with details present in website
+#        tags: ["Product Routes"]
+#        responses:
+#          200:    # status code
+#            description: Successul Response
+#            schema: 
+#              type: Arrays
+#              example: "Users String"
+#          400:
+#            description: User Error
+#            schema: 
+#              type: string
+#              example: "Some Error"
+
+tags:
+    - name : Product
+      description: Crud on product
+    - name : Authenication
+      description: Crud operation on Authenication
+    - name : User
+      description: Crud operation on User
+    - name: Order   
+
+paths:
+  /products/:
+    get:
+      tags:
+        - Product
+      summary: Get All Products
+      parameters:
+        - name: keyword
+          in: query
+          schema:
+            type: string
+          description: 'Find only whose products which match with keyword '
+          example: Puma shoes
+        - name: max_price
+          in: query
+          schema:
+            type: integer
+          description: >-
+            Find only whose products which have price less than or equal to 
+            max_price 
+          example: '3000'
+        - name: min_price
+          in: query
+          schema:
+            type: integer
+          description: >-
+            Find only whose products which have price greater than or equal to 
+            min_price 
+          example: '2000'
+        - name: rating
+          in: query
+          enum: [1,2,3,4,5,6]
+          schema:
+            type: integer
+          description: >-
+            Find only whose products which have Rating greater than or equal to 
+            rating 
+          example: '3'
+      responses:
+        '200':
+          description: OK
+          schema:
+              type: object
+              properties: 
+                success: 
+                  type: boolean
+                products:
+                  type: array
+                  items:
+                   type: object
+                   properties:
+                    _id:
+                      type: string
+                    name:
+                      type: string    
+                    price: 
+                      type: integer
+                    stock : 
+                      type: integer
+                    decription :
+                      type: string
+                    rating:
+                      type: integer
+                    numOfRating:
+                      type: integer
+                    images:
+                      type: array
+                      items:
+                       type: object
+                    reviews:
+                      type: array
+                      items:
+                       type: object
+                resultPerPage: 
+                  type: integer
+                productCout:
+                  type: integer           
+              example:
+                success: true
+                products:
+                  - _id: 6360b67a3842e202411d94f5
+                    name: Puma shoes
+                    category: shoes
+                    price: 3000
+                    stock: 10
+                    description: >-
+                      A pair of black walking shoes, has regular Styling,
+                      lace-ups detail
+                    rating: 4
+                    numOfRating: 3
+                    images: []
+                    reviews: []
+                    __v: 0
+                  - _id: 6360b6a63842e202411d94fb
+                    name: Puma shoes
+                    category: shoes
+                    price: 2000
+                    stock: 10
+                    description: >-
+                      A pair of black walking shoes, has regular Styling,
+                      lace-ups detail
+                       
+                    rating: 4
+                    numOfRating: 5
+                    images: []
+                    reviews: []
+                    __v: 0
+                resultPerPage: 10
+                productCount: 2
+  /product/{productId}:
+   get:
+    tags:
+     - Product  
+    summary: Get Product Details by Id
+    parameters:
+      - name: productId
+        in: path
+        required: true 
+        schema: 
+          type: string
+    responses:
+     '200':
+         description: Product Details
+     '500':
+         description: Error Internal Server Error 
+
+  /admin/product/{ProductId}:
+   put:
+    tags:
+     - Product
+    summary: Update Product --Admin 
+    parameters:
+      - name: ProductId
+        in: path
+        schema:
+         type: string
+        description: Product Id
+        example: 62ef870fd88436667103a146
+    requestBody:
+      required: true
+      content:
+       application/json:
+          schema:
+            $ref: "#components/schemas/Product"
+          example:
+              name: redmi y5
+              price: 1000
+              stock: 1
+              description: redmi y2 mobile
+              category: mobile
+              images: []
+    responses:
+      '200':
+         description: ok
+
+  /admin/product/{productId}:
+   delete:
+    tags:
+     - Product
+    summary: Delete Product --Admin
+    parameters:
+      - name: productId
+        in: path
+        schema:
+         type: string
+        description: Product Id
+        example: 62ef870fd88436667103a146
+    responses:
+      '200':
+         description: ok    
+
+  /admin/product/new:
+   post:
+     tags:
+      - Product 
+     summary: Create Product --Admin
+     requestBody:
+      required: true
+      content:
+       application/json:
+          schema:
+            $ref: "#components/schemas/Product"
+          example:
+              name: redmi y5
+              price: 1000
+              stock: 1
+              description: redmi y2 mobile
+              category: mobile
+              images: []
+     responses:
+       '200':
+          description: ok                      
+  /user/register:
+    post:
+      tags:
+       - Authenication
+      summary: Register an user 
+      description:
+      requestBody:
+       requried: true
+       content: 
+            multipart/form-data:
+             schema:
+               $ref: "#components/schemas/Sign Up"
+             example: 
+                name: Prince
+                email: kushwahaprince418@gmail.com
+                password: hbbbbbb444
+      responses:
+       '200':
+          description: ok                      
+  /user/login:
+    post:
+      tags:
+       - Authenication
+      summary: Login user 
+      requestBody:
+       required: true
+       content:
+         application/json:
+          schema:
+            $ref: "#components/schemas/Login"
+          example:
+           email: kushwahaprince418@gmail.com
+           password: Prince418@
+
+      responses:
+       '200':
+          description: ok
+  /user/logout:
+    get:
+      tags:
+       - Authenication
+      summary: Logout an user 
+      description :
+      responses:
+       '200':
+         description: ok
+  
+  /user/me:
+   get:
+    tags:
+     - User
+    summary : Get Login User Details
+    description :
+    responses:
+     '200':
+         description : User Details
+
+  /user/me/updatepassword:
+   put:
+    tags:
+     - User
+    summary: Update Password 
+    description: Update password of current login User
+    requestBody:
+     required: true
+     content:
+      application/json:
+       schema:
+        $ref: "#components/schemas/Password Update"
+       example:
+         oldpassword: "Prince418@"
+         password: "ppp1123456@"
+         confirmpassword: "pppppp2222@"      
+    responses:
+      '200':
+       description: Update password
+  /admin/users:
+    get:
+     tags:
+      - User
+     summary: Get All User --Admin
+     description: This is an Admin Route User with role Admin can use this Route 
+                  This route get all users details
+     responses:
+       '200':
+         description: Get all user details
+
+  /admin/user/{userId}:
+   get:
+    tags:
+     - User
+    summary: Get detail of singal user --Admin
+    description:
+    parameters:
+     - name: userId
+       in: path
+       required: true
+       example: 63733043132df6b8b151a84b
+       schema:
+        type: string
+        example: 63733043132df6b8b151a84b
+    responses:
+     200:
+      description: ok
+
+  /admin/user/updaterole/{userId}:
+   put:
+    tags:
+     - User
+    summary: Update User Role --Admin
+    description:
+    parameters:
+     - name: userId
+       in: path
+       required: true
+       example: 63733043132df6b8b151a84b
+       schema:
+        type: string
+        example: 63733043132df6b8b151a84b
+    requestBody:
+      required: true
+      content:
+         application/json:
+           schema:
+            $ref: "#components/schemas/Update Role"   
+           example:
+            role: admin 
+         application/x-www-form-urlencoded:
+           schema:
+            $ref: "#components/schemas/Update Role"   
+           example:
+            role: admin              
+    responses:
+      200:
+        description: ok
+  /admin/user/{Id}:
+   delete:
+    tags:
+     - User
+    summary: Delete User --Admin
+    parameters:
+      - name: Id
+        in: path
+        schema:
+         type: string
+         example: 62ef870fd88436667103a146
+        description: userId
+        example: 62ef870fd88436667103a146
+    responses:
+      '200':
+         description: ok
+
+  /user/me/update:
+   put:
+    tags:
+     - User
+    summary: Update User Profile  
+    description: Update Profile of Current Login User
+    parameters:
+        - name : User
+          in: body
+          schema:
+            $ref: "#components/schemas/userProfile"
+            example:
+             name: Prince
+             email: kushwahaprince418@gmail.com
+             password: hbbbbbb444    
+    responses:
+      '200':
+        description: ok                      
+  /orders/me:
+   get:
+    tags:
+     - Order
+    summary: Get All Order 
+    description: Get all order of current login user
+    responses:
+     '200':
+       description: Ok
+
+  /admin/order/{orderId}:
+   get:
+    tags:
+     - Order
+    summary: Get detail of singal Order --Admin
+    description: Get
+    parameters:
+     - name: orderId
+       in: path
+       required: true
+       schema:
+        type: string
+        example: 630b31b97b6e63a5f1383299
+    responses:
+     '200':
+      description: ok  
+  /order/me:
+   get:
+    tags:
+     - Order
+    summary: Get detail of  Order of login user
+    description:
+    parameters:
+     - name: order
+       in: query
+       required: true
+    responses:
+     '200':
+       description: Ok
+
+  /admin/order/{OrderId}:
+   put:
+    tags:
+     - Order
+    summary: Update Order Status  --Admin
+    description:
+    parameters:
+     - name: OrderId
+       in: path
+       required: true
+       example: 630b31b97b6e63a5f1383299
+    requestBody:
+     required: true
+     content:
+      application/json:
+       schema:
+          $ref: "#components/schemas/Order Status"   
+       example:
+         status: "reaching"   
+      application/x-www-form-urlencoded:
+       schema:
+          $ref: "#components/schemas/Order Status"   
+       example:
+         status: "reaching"   
+    responses:
+     200:
+      description: 200
+  /admin/orders/:            
+   get:
+    tags:
+     - Order
+    summary: Get All Order of All Users  --Admin 
+    description: Get all order of all User by Admin
+    responses:
+     '200':
+       description: Ok
+  /admin/order/:            
+   get:
+    tags:
+     - Order
+    summary: Get All Order of singal user  --Admin 
+    description: Get all order of all User by Admin
+    parameters:
+     - name: user
+       in: query
+       required: true
+    responses:
+     '200':
+       description: Ok
+
+components:
+    schemas:
+      Password Update:
+        type: object
+        properties:
+         oldpassword:
+          type: string
+          required: true
+         password:
+          type: string
+          required: true
+         confirmpassword:
+          type: string
+          required: true
+      Sign Up:
+            type: object
+            properties:
+             name:
+              type: string
+              required: true
+             email:
+              type: string
+              required: true
+             password:
+              type: string
+              required: true
+             avatar:
+              type: string
+              format: binary
+      Login:
+            type: object
+            properties:
+             email:
+              type: string
+              required: true
+             password:
+              type: string
+              required: true
+      Product:
+         type: object
+         properties:
+            name:
+              type: string    
+            price: 
+              type: integer
+              description: this is an product Price
+            stock: 
+              type: integer
+            description:
+              type: string
+            category:
+              type: string  
+            images:
+              type: array
+              items:
+                type: object
+      User Role:
+        type: object
+        properties:
+         role:
+          type: string
+          enum: ["user","admin"]
+      Order Status:
+        type: object
+        properties:
+         role:
+          type: string
+          enum: ["reaching","cancel","pending"]
+
+                      
+
+
+
+
+ 
+

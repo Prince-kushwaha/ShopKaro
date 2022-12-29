@@ -1,0 +1,34 @@
+.shippingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.shippingInfoBox {
+  width: 25%;
+}
+.shippingInfoBox > div {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.shippingInfoBox > div > svg {
+  position: absolute;
+  margin: 5px;
+}
+
+.shippingInfoBox > div > input {
+  padding: 10px 30px;
+  width: 100%;
+}
+
+.shippingInfoBox > div > select {
+  padding: 10px 30px;
+  width: 100%;
+}
+
+.submitBox > input[type="submit"] {
+  padding: 10px 0px;
+  background-color: orange;
+  width: 100%;
+}

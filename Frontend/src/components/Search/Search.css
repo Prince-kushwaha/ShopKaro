@@ -1,0 +1,91 @@
+.search {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.products {
+  display: flex;
+  flex-basis: 80%;
+  flex-wrap: wrap;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.page-item {
+  list-style: none;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid;
+}
+
+.page-item:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.page-item:hover .page-link {
+  color: rgb(80, 80, 80);
+}
+
+.pagination-box {
+  margin: 1vmax;
+}
+
+.page-activeItem {
+  background-color: tomato;
+}
+
+.page-activeLink {
+  color: white;
+}
+
+.filter-box {
+  padding: 20px;
+  margin-top: 50px;
+  flex-basis: 20%;
+}
+
+.filter-box h3 {
+  margin: 5px 0;
+}
+
+.price-box p {
+  font-style: italic;
+}
+
+.price-box li {
+  list-style: none;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.price-box li:hover {
+  background-color: bisque;
+}
+
+.category-box li {
+  list-style: none;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.category-box li:hover {
+  background-color: bisque;
+}
+
+.rating-box {
+  display: flex;
+  flex-direction: column;
+}
+.rating-box li {
+  list-style: none;
+}
+.star-ratings {
+  cursor: pointer;
+}
+
+.star-ratings:hover {
+  background-color: antiquewhite;
+}

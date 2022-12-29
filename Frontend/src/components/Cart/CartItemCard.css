@@ -1,0 +1,21 @@
+.CartItemCard {
+  display: flex;
+  height: 8vmax;
+  padding: 10px;
+}
+
+.product-image > img {
+  width: 10vmax;
+  height: 8vmax;
+}
+
+.product-info > button {
+  color: rgb(249, 127, 127);
+  background-color: aliceblue;
+  border: none;
+  cursor: pointer;
+}
+
+.product-info > a {
+  text-decoration: none;
+}

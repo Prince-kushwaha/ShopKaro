@@ -1,0 +1,4 @@
+export let ADD_CART_Item = "ADD_CART_Item";
+export let REMOVE_CART_Item = "REMOVE_CART_Item";
+export let UPDATE_CART_ITEM_QUANTITY = "UPDATE_CART_ITEM_QUANTITY";
+export let SAVE_SHIPPING_INFO = "SAVE_SHIPPING_INFO";
