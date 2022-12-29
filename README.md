@@ -1,5 +1,6 @@
 # ShopKaro Web App
-ShopKaro is Full stack Shopping Website 
+A full-stack online shopping website. Provide interaction Between Buyer,Seller and Admin
+
 
 ShopKaro Backend build using NodeJs, ExpressJs and MongoDB,Cloundinary
 <br>
