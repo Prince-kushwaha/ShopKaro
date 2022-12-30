@@ -24,18 +24,18 @@ function Header() {
 
   return (
     <div className="header">
-      <h3>ECOMMERCE</h3>
+      <h3>ShopKaro</h3>
       <Link to="/home">Home</Link>
       <input
-        placeholder="  search for product"
+        placeholder="Search for products, brand and more"
         type="search"
         onChange={handleChangeEvent}
       ></input>
       <input type="submit" value="Search" onClick={handleSearch} />
       {!isAuthenticated && <Link to="/Login">Login</Link>}
       {!isAuthenticated && <Link to="/sign">SignUp</Link>}
-      <Link to="">About</Link>
-      <Link to="">Contact</Link>
+      {/* <Link to="">About</Link>
+      <Link to="">Contact</Link> */}
       <Link to="/cart">
         <ShoppingCart />
       </Link>

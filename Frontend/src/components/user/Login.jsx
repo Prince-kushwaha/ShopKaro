@@ -8,7 +8,7 @@ import { cleanError, userLogin } from "../../action-creater/userActionCreater";
 import Loader from "../layout/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { User_CLEAN_ERROR } from "../../constants/authenticationConstants";
-
+import MetaData from "../MetaData";
 function Login() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -52,6 +52,7 @@ function Login() {
   } else {
     return (
       <div className="loginSignUpContainer">
+        <MetaData title={"ShopKaro Sign In"}></MetaData>
         <div className="loginSignUpBox">
           <form className="login-form" encType="">
             <div className="email-box">

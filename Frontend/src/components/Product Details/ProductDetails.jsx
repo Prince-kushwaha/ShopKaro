@@ -1,4 +1,3 @@
-import "./productDetails.css";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,10 +8,12 @@ import Loader from "../../components/layout/Loader/Loader";
 import StarRatings from "react-star-ratings";
 import Review from "./Review";
 import { Image } from "cloudinary-react";
+import "./productDetails.css";
 import "react-slideshow-image/dist/styles.css";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import { addCartItemAction } from "../../action-creater/cartActionCreater";
+import MetaData from "../MetaData";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -22,7 +23,6 @@ function ProductDetails() {
   let { loading, error, productDetail: product } = useSelector(function(state) {
     return state.productDetail;
   });
-
 
   useEffect(
     function() {
@@ -39,6 +39,7 @@ function ProductDetails() {
   if (loading === false) {
     return (
       <div className="product-card card">
+        <MetaData title={"ShopKaro : " + product.name}></MetaData>
         <div className="product-details">
           <div className="product-images">
             <AwesomeSlider>

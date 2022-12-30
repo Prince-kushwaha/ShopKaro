@@ -1,7 +1,7 @@
 #footer {
   display: flex;
-  background-color: rgb(74, 72, 72);
-  color: white;
+  background-color: whitesmoke;
+  color: black;
   box-sizing: border-box;
   padding: 1vmax;
 }
@@ -13,7 +13,6 @@
   align-items: center;
   text-align: center;
 }
-
 
 .leftFooter > img {
   margin-top: 1vmax;
@@ -29,7 +28,6 @@
 .leftFooter > h4 {
   font-size: 1.5vmax;
 }
-
 
 .midFooter {
   width: 60%;
@@ -56,7 +54,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 .rightFooter > a {
   margin: 0.5vmax;

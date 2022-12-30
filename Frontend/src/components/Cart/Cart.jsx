@@ -1,11 +1,12 @@
 import "./Cart.css";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import CartItemCard from "./CartItemCard";
 import { useDispatch, useSelector } from "react-redux";
 import { UpdateCartItemQuantity } from "../../action-creater/cartActionCreater";
 import Loader from "../layout/Loader/Loader";
 import cartImage from "../../images/cartImage.webp";
 import { Link } from "react-router-dom";
+import MetaData from "../MetaData";
 
 function Cart() {
   let [grossTotal, setGrossTotal] = useState(0);
@@ -40,20 +41,23 @@ function Cart() {
     return <Loader />;
   } else if (cart.cartItems.length == 0) {
     return (
-      <div className="emptyCart">
-        <img src={cartImage}></img>
-        <Link to="/">View Products</Link>
-      </div>
+      <Fragment>
+        <MetaData title={"ShopKaro Cart"}></MetaData>
+        <div className="emptyCart">
+          <img src={cartImage}></img>
+          <Link to="/">View Products</Link>
+        </div>
+      </Fragment>
     );
   } else {
     return (
       <div className="cartContainer">
+        <MetaData title={"ShopKaro Cart"}></MetaData>s
         <div className="cartHeader">
           <p>Product</p>
           <p>Quantity</p>
           <p>SubTotal</p>
         </div>
-
         <div className="cartItems">
           {cart.cartItems &&
             cart.cartItems.map(function(item) {

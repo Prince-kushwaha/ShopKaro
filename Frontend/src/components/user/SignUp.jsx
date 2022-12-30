@@ -10,6 +10,7 @@ import Loader from "../layout/Loader/Loader";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User_CLEAN_ERROR } from "../../constants/authenticationConstants";
+import MetaData from "../MetaData";
 
 function SignUp() {
   let dispatch = useDispatch();
@@ -74,6 +75,7 @@ function SignUp() {
   } else {
     return (
       <div className="loginSignUpContainer">
+        <MetaData title={"ShopKaro Sign Up"}></MetaData>
         <div className="loginSignUpBox">
           <form className="signUp-form signUpForm">
             <div className="name-box">

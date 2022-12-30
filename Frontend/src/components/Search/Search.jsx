@@ -8,6 +8,7 @@ import Loader from "../layout/Loader/Loader";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import StarRatings from "react-star-ratings";
+import MetaData from "../MetaData";
 
 function Search() {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ function Search() {
     return (
       <Fragment>
         <div className="search">
+          <MetaData title={"ShopKaro : " + keyword}></MetaData>
           <div className="products">
             {products &&
               products.map((product) => (
