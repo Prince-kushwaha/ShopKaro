@@ -54,8 +54,6 @@
   flex-wrap: wrap;
 }
 
-
-
 .detailBlock-1 p {
   margin: 10px 0;
 }
@@ -73,19 +71,16 @@
 }
 
 .detailBlock-3 button {
-  height: 100%;
   width: 20px;
 }
 
 .detailBlock-3 input[type="number"] {
-  height: 100%;
   display: inline-block;
   max-width: 40px;
   box-sizing: border-box;
 }
 
 .detailBlock-3 input[type="button"] {
-  height: 100%;
   width: 120px;
   border-radius: 20px;
   margin: 0 16px;
@@ -93,8 +88,6 @@
 }
 
 .detailBlock-4 button {
-  height: 100%;
-  width: 120px;
   border-radius: 20px;
   padding: 10px;
   margin: 10px 0;

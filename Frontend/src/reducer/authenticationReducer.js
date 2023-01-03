@@ -35,8 +35,8 @@ export let LoginReducer = function(state = { user: {} }, action) {
     case USER_SIGNUP_REQUEST:
     case LOAD_USER_REQUEST:
       return {
-        loading: true,
         ...state,
+        loading: true,
       };
 
     case USER_LOGIN_SUCCESS:
@@ -52,6 +52,7 @@ export let LoginReducer = function(state = { user: {} }, action) {
     case USER_LOGIN_FAIL:
     case USER_SIGNUP_FAIL:
       return {
+        ...state,
         loading: false,
         err: action.err.error,
         user: null,

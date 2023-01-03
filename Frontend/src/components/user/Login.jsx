@@ -47,6 +47,7 @@ function Login() {
     let { email, password } = loginData;
     dispatch(userLogin(email, password));
   }
+
   if (loading) {
     return <Loader></Loader>;
   } else {
@@ -54,6 +55,7 @@ function Login() {
       <div className="loginSignUpContainer">
         <MetaData title={"ShopKaro Sign In"}></MetaData>
         <div className="loginSignUpBox">
+          <h3>Login</h3>
           <form className="login-form" encType="">
             <div className="email-box">
               <MailOutlineIcon />

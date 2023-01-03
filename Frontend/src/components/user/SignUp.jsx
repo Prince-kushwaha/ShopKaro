@@ -77,6 +77,7 @@ function SignUp() {
       <div className="loginSignUpContainer">
         <MetaData title={"ShopKaro Sign Up"}></MetaData>
         <div className="loginSignUpBox">
+          <h3>Register</h3>
           <form className="signUp-form signUpForm">
             <div className="name-box">
               <FaceIcon />
