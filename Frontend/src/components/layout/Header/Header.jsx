@@ -2,45 +2,77 @@ import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import "./Header.css";
 import UserOption from "../../UserOption/UserOption";
 import { ShoppingCart } from "@mui/icons-material";
+import "./Header.css";
 
 function Header() {
-  let [keyword, updateKeyword] = useState("");
+  let [keyword, setKeyword] = useState("");
   let navigate = useNavigate();
-  let { isAuthenticated } = useSelector(function(state) {
+  let { isAuthenticated } = useSelector(function (state) {
     return state.login;
   });
 
-  function handleSearch(event) {
+  function search(event) {
     event.preventDefault();
-    navigate("products/" + keyword);
-  }
-
-  function handleChangeEvent(event) {
-    updateKeyword(event.target.value);
+    if (keyword) navigate("products/" + keyword);
   }
 
   return (
-    <div className="header">
-      <h3>ShopKaro</h3>
-      <Link to="/home">Home</Link>
-      <input
-        placeholder="Search for products, brand and more"
-        type="search"
-        onChange={handleChangeEvent}
-      ></input>
-      <input type="submit" value="Search" onClick={handleSearch} />
-      {!isAuthenticated && <Link to="/Login">Login</Link>}
-      {!isAuthenticated && <Link to="/sign">SignUp</Link>}
-      {/* <Link to="">About</Link>
-      <Link to="">Contact</Link> */}
-      <Link to="/cart">
-        <ShoppingCart />
-      </Link>
-      {isAuthenticated && <UserOption />}
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <Link class="navbar-brand" to="/home">
+          ShopKaro
+        </Link>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/home">
+                Home
+              </Link>
+            </li>
+            <form class="d-flex nav-item" onSubmit={search}>
+              <input
+                class="form-control me-2"
+                type="search"
+                value={keyword}
+                onChange={(event) => setKeyword(event.target.value)}
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-light" type="submit">
+                Search
+              </button>
+            </form>
+
+            {!isAuthenticated && (
+              <li className="nav-item">
+                <Link className="nav-link" aria-current="page" to="/Login">
+                  Login
+                </Link>
+              </li>
+            )}
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/cart">
+                <ShoppingCart />
+              </Link>
+            </li>
+            {isAuthenticated && <UserOption />}
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 }
 

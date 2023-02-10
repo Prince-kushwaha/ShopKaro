@@ -1,0 +1,25 @@
+div.signup-container {
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.signup-box {
+  padding: 50px;
+  width: 40%;
+}
+
+div.signup-btn {
+  margin-top: 1rem;
+}
+
+form.signup-form > div {
+  margin: 10px 0;
+}
+
+div.form-floating > label:after {
+  content: "*";
+  color: red;
+}

@@ -12,8 +12,8 @@ import {
   Order_ErrorClean,
 } from "../constants/orderConstansts";
 
-export let createOrder = function(order) {
-  return async function(dispatch) {
+export let createOrder = function (order) {
+  return async function (dispatch) {
     try {
       dispatch({
         type: Create_Order_Request,
@@ -33,8 +33,8 @@ export let createOrder = function(order) {
   };
 };
 
-export let getMyOrders = function() {
-  return async function(dispatch) {
+export let getMyOrders = function () {
+  return async function (dispatch) {
     try {
       dispatch({ type: Get_My_Orders_Request });
       let { data } = await axios.get("/api/v1/orders/me");
@@ -46,7 +46,7 @@ export let getMyOrders = function() {
 };
 
 export function getOrderDetails(orderId) {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       dispatch({ type: OrderDetail_Request });
       let { data } = await axios.get(`/api/v1/order/me/${orderId}`);
@@ -58,8 +58,8 @@ export function getOrderDetails(orderId) {
   };
 }
 
-export let clearErrors = function() {
-  return function(dispatch) {
+export let clearErrors = function () {
+  return function (dispatch) {
     // dispatch({
     //   type: Order_ErrorClean,
     // });

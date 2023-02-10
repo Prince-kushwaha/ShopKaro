@@ -2,7 +2,6 @@ import "./Cart.css";
 import React, { Fragment, useEffect, useState } from "react";
 import CartItemCard from "./CartItemCard";
 import { useDispatch, useSelector } from "react-redux";
-import { UpdateCartItemQuantity } from "../../action-creater/cartActionCreater";
 import Loader from "../layout/Loader/Loader";
 import cartImage from "../../images/cartImage.webp";
 import { Link } from "react-router-dom";
@@ -10,93 +9,78 @@ import MetaData from "../MetaData";
 
 function Cart() {
   let [grossTotal, setGrossTotal] = useState(0);
-  let dispatch = useDispatch();
-  let cart = useSelector(function(state) {
+  let [totalDiscount, setTotalDiscout] = useState(0);
+  let cart = useSelector(function (state) {
     return state.cart;
   });
 
+  let cartItems = cart.cartItems;
+
   useEffect(
-    function() {
-      let total = 0;
-      for (let i = 0; cart && i < cart.cartItems.length; i++)
-        total = total + cart.cartItems[i].price * cart.cartItems[i].quantity;
-      setGrossTotal(total);
+    function () {
+      let totalPrice = 0;
+      let discountPrice = 0;
+      for (let i = 0; cartItems && i < cartItems.length; i++) {
+        totalPrice = totalPrice + cartItems[i].price * cartItems[i].quantity;
+        discountPrice +=
+          Math.round((cartItems[i].price / 100) * cartItems[i].discount) *
+          cartItems[i].quantity;
+      }
+      setGrossTotal(totalPrice);
+      setTotalDiscout(discountPrice);
     },
-    [cart]
+    [cartItems, cart]
   );
 
-  function decreaseQuantity(id, quantity) {
-    let newQuantity = quantity - 1;
-    if (newQuantity == 0) return;
-    dispatch(UpdateCartItemQuantity(id, newQuantity));
-  }
-
-  function increaseQuantity(id, quantity, stock) {
-    let newQuantity = quantity + 1;
-    if (newQuantity > stock) return;
-    dispatch(UpdateCartItemQuantity(id, newQuantity));
-  }
-
-  if (cart == undefined) {
-    return <Loader />;
-  } else if (cart.cartItems.length == 0) {
+  if (cartItems.length === 0) {
     return (
-      <Fragment>
-        <MetaData title={"ShopKaro Cart"}></MetaData>
-        <div className="emptyCart">
-          <img src={cartImage}></img>
-          <Link to="/">View Products</Link>
+      <div className="cart-empty-container card">
+        <div className="cart-empty-box">
+          <img
+            alt="cart-image"
+            src="https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90"
+          ></img>
+          <h5>Your cart is empty!</h5>
+          <p>Add items to it now.</p>
+          <Link to="/home" className="btn btn-primary w-100">
+            Shop now
+          </Link>
         </div>
-      </Fragment>
+      </div>
     );
   } else {
     return (
-      <div className="cartContainer">
-        <MetaData title={"ShopKaro Cart"}></MetaData>s
-        <div className="cartHeader">
-          <p>Product</p>
-          <p>Quantity</p>
-          <p>SubTotal</p>
-        </div>
-        <div className="cartItems">
-          {cart.cartItems &&
-            cart.cartItems.map(function(item) {
-              return (
-                <div className="product">
-                  <div className="cart-card">
-                    <CartItemCard details={item}></CartItemCard>
-                  </div>
-                  <div className="product-quantity">
-                    <button
-                      onClick={() => decreaseQuantity(item._id, item.quantity)}
-                    >
-                      -
-                    </button>
-                    <input type="number" readOnly value={item.quantity} />
-                    <button
-                      onClick={() =>
-                        increaseQuantity(item._id, item.quantity, item.stock)
-                      }
-                    >
-                      +
-                    </button>
-                  </div>
-                  <div className="product-price">
-                    <p>₹{item.quantity * item.price}</p>
-                  </div>
+      <div className="cart-container">
+        <div className="cart-box">
+          <div className="cart-products">
+            {cartItems.map((cartItem) => (
+              <CartItemCard info={cartItem} />
+            ))}
+          </div>
+          <div className="cart-products-pricing">
+            <div class="card  mb-3">
+              <div class="card-header bg-transparent">
+                <p>PRICE DETAILS</p>
+              </div>
+              <div class="card-body">
+                <div className="total-price-box">
+                  <p className="card-text">Price</p>
+                  <p>₹{grossTotal}</p>
                 </div>
-              );
-            })}
-        </div>
-        <div className="cartGrossPriceHeader">
-          <div className="cartGrossPriceHeaderBox">
-            <hr></hr>
-            <div className="cartGrossTotalPrice">
-              <p>GrossTotal</p>
-              <p>{grossTotal}</p>
-            </div>
-            <div className="cartCheckOutButton">
-              <Link to="/shipping">Check Out</Link>
+                <div className="total-discount-box">
+                  <p>Discount</p>
+                  <p className="text-success">-₹{totalDiscount}</p>
+                </div>
+                <div className="total-amount-box">
+                  <p>Total Amount</p>
+                  <p>₹{grossTotal - totalDiscount}</p>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent ">
+                <button className="btn w-100 btn-warning btn-lg">
+                  Place Order
+                </button>
+              </div>
             </div>
           </div>
         </div>

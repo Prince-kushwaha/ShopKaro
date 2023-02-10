@@ -27,13 +27,18 @@ import {
   USER_FORGETPASSWORD_SUCCESS,
   USER_FORGETPASSWORD_REQUEST,
   USER_FORGETPASSWORD_ErrorClean,
+  USER_ADDADDRESS_REQUEST,
+  USER_ADDADDRESS_SUCCESS,
+  USER_ADDADDRESS_FAIL,
 } from "../constants/authenticationConstants";
+import Toast from "../Toast";
 
-export let LoginReducer = function(state = { user: {} }, action) {
+export let LoginReducer = function (state = { user: {} }, action) {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
     case USER_SIGNUP_REQUEST:
     case LOAD_USER_REQUEST:
+    case USER_ADDADDRESS_REQUEST:
       return {
         ...state,
         loading: true,
@@ -42,6 +47,7 @@ export let LoginReducer = function(state = { user: {} }, action) {
     case USER_LOGIN_SUCCESS:
     case USER_SIGNUP_SUCCESS:
     case LOAD_USER_SUCCESS:
+    case USER_ADDADDRESS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -57,6 +63,13 @@ export let LoginReducer = function(state = { user: {} }, action) {
         err: action.err.error,
         user: null,
         isAuthenticated: false,
+      };
+
+    case USER_ADDADDRESS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        err: action.payload.error,
       };
 
     case LOAD_USER_FAIL:
@@ -81,6 +94,7 @@ export let LoginReducer = function(state = { user: {} }, action) {
       };
 
     case USER_LOGOUT_SUCCESS:
+      Toast("Logout is successfull", "success");
       return {
         loading: false,
         isAuthenticated: false,
@@ -88,6 +102,7 @@ export let LoginReducer = function(state = { user: {} }, action) {
       };
 
     case USER_LOGOUT_FAIL:
+      Toast("Logout is fail", "error");
       return {
         loading: false,
         ...state,
@@ -98,7 +113,7 @@ export let LoginReducer = function(state = { user: {} }, action) {
   }
 };
 
-export let updateProfileReducer = function(state = {}, action) {
+export let updateProfileReducer = function (state = {}, action) {
   switch (action.type) {
     case USER_UpdateProfile_REQUEST:
       return {
@@ -132,7 +147,7 @@ export let updateProfileReducer = function(state = {}, action) {
   }
 };
 
-export let changePasswordReducer = function(state = {}, action) {
+export let changePasswordReducer = function (state = {}, action) {
   switch (action.type) {
     case USER_CHANGEPASSWORD_REQUEST:
       return {
@@ -168,7 +183,7 @@ export let changePasswordReducer = function(state = {}, action) {
   }
 };
 
-export let forgetPasswordReducer = function(state = {}, action) {
+export let forgetPasswordReducer = function (state = {}, action) {
   switch (action.type) {
     case USER_FORGETPASSWORD_REQUEST:
       return {

@@ -25,6 +25,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./components/Cart/OrderSuccess";
 import MyOrders from "./components/Order/MyOrders";
 import OrderDetails from "./components/Order/OrderDetails";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
+import CheckOut from "./components/CheckOut/CheckOut";
+
 function App() {
   let [stripeApiKey, setStripeApiKey] = useState("");
   async function getStripeApiKey() {
@@ -32,7 +37,7 @@ function App() {
     setStripeApiKey(data.stripeApikey);
   }
 
-  useEffect(function() {
+  useEffect(function () {
     store.dispatch(loadUser());
     getStripeApiKey();
   }, []);
@@ -73,14 +78,7 @@ function App() {
               </RequireAuth>
             }
           ></Route>
-          <Route
-            path="/password/forget"
-            element={
-              <RequireAuth>
-                <PasswordForget />
-              </RequireAuth>
-            }
-          ></Route>
+          <Route path="/password/forget" element={<PasswordForget />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
           <Route
             path="/account"
@@ -142,8 +140,16 @@ function App() {
               </RequireAuth>
             }
           ></Route>
+          <Route
+            path="/checkout"
+            element={
+              <RequireAuth>
+                <CheckOut />
+              </RequireAuth>
+            }
+          ></Route>
         </Routes>
-        <Footer></Footer>
+        <ToastContainer />
       </BrowserRouter>
     </>
   );

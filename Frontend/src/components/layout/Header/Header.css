@@ -1,33 +1,10 @@
-.header {
-  display: flex;
-  min-height: 60px;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
-  background-color: #2455f4;
-  color: white;
+form.nav-item > input[type="search"] {
+  width: 34vw;
+}
+ul.navbar-nav > li {
+  margin: 0 0.5rem;
 }
 
-.header a {
-  text-decoration: none;
-  color: white;
-  margin: 0 1vmax;
+li.nav-item > a {
+  color: aliceblue !important;
 }
-
-.header input[type="search"] {
-  min-height: 40px;
-  flex-basis: 30vmax;
-  background-color: white;
-  padding: 0 10px;
-  border: none;
-}
-
-.header input[type="submit"] {
-  min-height: 30px;
-  min-width: 100px;
-  margin: 10px;
-  background-color: white;
-  border: none;
-  cursor: pointer;
-}
-

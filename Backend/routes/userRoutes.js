@@ -14,6 +14,7 @@ const {
   updateUserRole,
   addProductReview,
   deleteProductReview,
+  addAddress,
 } = require("../controllers/userController");
 
 // routes
@@ -31,17 +32,17 @@ router
   .route("/user/me/updatepassword")
   .put(isAuthenticatedUser, updatePassword);
 
+router.route("/user/address/").post(isAuthenticatedUser, addAddress);
+
 router.route("/admin/users").get(isAuthenticatedUser, isAdmin, getAllUser);
 
 router
   .route("/admin/user/:userId")
   .get(isAuthenticatedUser, isAdmin, getUserDetailsByAdmin)
-  .delete(isAuthenticatedUser, isAdmin, deleteUser)
+  .delete(isAuthenticatedUser, isAdmin, deleteUser);
 router
   .route("/admin/user/updaterole/:userId")
   .put(isAuthenticatedUser, isAdmin, updateUserRole);
-;  
-
 router.route("/user/review/").put(isAuthenticatedUser, addProductReview);
 
 router

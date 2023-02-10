@@ -1,5 +1,4 @@
-.home {
-  display: flex;
-  min-height: 100vh;
-  flex-wrap: wrap;
+div.container > div.row {
+  row-gap: 5px;
 }
+

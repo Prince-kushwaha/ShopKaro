@@ -10,14 +10,13 @@ import {
 
 import axios from "axios";
 
-export const getProducts = function(
+export const getProducts = function (
   keyword = "",
   currentPage = 1,
-  price = [0, 50000],
-  category = "",
+  price = [0, 1000000],
   rating = 0
 ) {
-  return async function(distach) {
+  return async function (distach) {
     try {
       distach({
         type: ALL_PRODUCT_REQUEST,
@@ -28,10 +27,6 @@ export const getProducts = function(
         `keyword=${keyword}` +
         `&page=${currentPage}` +
         `&max_price=${price[1]}&min_price=${price[0]}`;
-
-      if (category !== "") {
-        link = link + `&category=${category}`;
-      }
 
       if (rating > 0) {
         link = link + `&rating=${rating}`;
@@ -52,8 +47,8 @@ export const getProducts = function(
   };
 };
 
-export const getProductDetail = function(_id) {
-  return async function(distach) {
+export const getProductDetail = function (_id) {
+  return async function (distach) {
     try {
       distach({
         type: PRODUCT_DETAILS_REQUEST,
@@ -74,9 +69,8 @@ export const getProductDetail = function(_id) {
   };
 };
 
-
-export const clearError = function() {
-  return function(distach) {
+export const clearError = function () {
+  return function (distach) {
     distach({
       type: CLEAN_ERROR,
     });

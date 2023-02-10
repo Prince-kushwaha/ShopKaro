@@ -1,102 +1,27 @@
-.password-box {
-  display: flex;
-}
-
-.email-box {
-  display: flex;
-}
-
-.loginSignUpContainer {
-  min-height: 100vh;
+div.login-container {
+  box-sizing: border-box;
+  height: 80vh;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: antiquewhite;
 }
 
-.loginSignUpBox {
-  background-color: whitesmoke;
-  width: 30vmax;
+div.login-box {
+  padding: 50px;
+  width: 40%;
 }
 
-.login_sign_toogler {
+div.login-btn {
+  margin-top: 1rem;
+}
+
+div.login-box > div:last-of-type {
   display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-.login_sign_toogler > p {
-  flex-basis: 50%;
-  padding: 10px 0;
-  text-align: center;
-  cursor: pointer;
-}
-
-.toogler-btn {
-  width: 50%;
-  background-color: red;
-  height: 2px;
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-
-.email-box,
-.password-box {
-  margin: 20px;
-  align-items: center;
-}
-
-.email-box > input,
-.password-box > input {
-  width: 100%;
-  padding: 10px 30px;
-}
-
-.email-box > svg,
-.password-box > svg {
-  position: absolute;
-  margin: 0 5px;
-}
-
-.login-form > input[type="submit"],
-.signUp-form input[type="submit"] {
-  margin: 20px;
-  padding: 10px 20px;
-  width: 90%;
-  color: white;
-  border: 1px solid;
-  background-color: orange;
-  cursor: pointer;
-}
-
-
-.login-form > a {
-  display: inline;
-  position: relative;
-  left: 63%;
-}
-
-.sign-profileImage > img {
-  height: 25px;
-}
-
-.name-box,
-.sign-email-box,
-.sign-password-box,
-.sign-profileImage {
-  display: flex;
-  align-items: center;
-  margin: 20px;
-}
-.name-box > input,
-.sign-email-box > input,
-.sign-password-box > input {
-  width: 100%;
-  padding: 10px 30px;
-}
-
-.name-box > svg,
-.sign-email-box > svg,
-.sign-password-box > svg {
-  position: absolute;
-  margin: 0 5px;
+div.login-box > div:last-of-type > a {
+  text-decoration: none;
 }

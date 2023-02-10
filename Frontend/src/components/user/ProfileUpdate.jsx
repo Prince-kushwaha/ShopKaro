@@ -87,10 +87,10 @@ function UpdateProfile() {
     return <Loader></Loader>;
   } else {
     return (
-      <div className="loginSignUpContainer">
-        <div className="loginSignUpBox">
+      <div className="profileUpdateContainer">
+        <div className="profileUpdateBox">
           <h3>Update Profile</h3>
-          <form className="signUp-form signUpForm">
+          <form className="profileUpdate-form signUpForm">
             <div className="name-box">
               <FaceIcon />
               <input
@@ -101,7 +101,7 @@ function UpdateProfile() {
                 onChange={handledataChange}
               />
             </div>
-            <div className="sign-email-box">
+            <div className="email-box">
               <MailOutlineIcon />
               <input
                 type="email"
@@ -110,7 +110,7 @@ function UpdateProfile() {
                 onChange={handledataChange}
               />
             </div>
-            <div className="sign-profileImage">
+            <div className="profileImage">
               <img src={avatarPreview}></img>
               <input
                 type="file"

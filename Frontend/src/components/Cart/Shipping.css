@@ -1,34 +1,19 @@
-.shippingContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.shippingInfoBox {
-  width: 25%;
-}
-.shippingInfoBox > div {
-  display: flex;
-  align-items: center;
-  margin: 10px;
+div.shipping-container {
+  padding: 20px;
 }
 
-.shippingInfoBox > div > svg {
-  position: absolute;
-  margin: 5px;
+div.address-content > span:first-of-type {
+  font-weight: 500;
 }
 
-.shippingInfoBox > div > input {
-  padding: 10px 30px;
-  width: 100%;
+div.address-content > span:last-of-type {
+  margin-left: 5px;
 }
 
-.shippingInfoBox > div > select {
-  padding: 10px 30px;
-  width: 100%;
-}
-
-.submitBox > input[type="submit"] {
-  padding: 10px 0px;
-  background-color: orange;
-  width: 100%;
+div.address-box {
+  margin: 5px 0;
+  padding: 10px 10px;
+  background-color: #fcf5ee;
+  border: 1px solid #fbd8b4;
+  border-radius: 5px;
 }

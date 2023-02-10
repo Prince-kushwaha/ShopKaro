@@ -2,49 +2,41 @@ import React, { useState, useRef, useEffect } from "react";
 import "./Login.css";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanError, userLogin } from "../../action-creater/userActionCreater";
 import Loader from "../layout/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { User_CLEAN_ERROR } from "../../constants/authenticationConstants";
 import MetaData from "../MetaData";
+import { Link } from "react-router-dom";
+import toast from "../../Toast";
+import websiteIcon from "../../images/favicon.png";
 function Login() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  let { loading, err, isAuthenticated } = useSelector(function(state) {
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+  let { loading, err, isAuthenticated } = useSelector(function (state) {
     return state.login;
   });
 
   useEffect(
-    function() {
+    function () {
       if (err) {
+        toast(err, "error");
         dispatch(cleanError(User_CLEAN_ERROR));
-        alert(err);
       }
 
       if (isAuthenticated) {
-        navigate("/account");
+        navigate("/home");
       }
     },
 
     [err, isAuthenticated]
   );
 
-  let [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-
-  function loginDataChange(event) {
-    let { name, value } = event.target;
-    loginData[name] = value;
-    setLoginData(loginData);
-  }
-
   function loginSubmit(event) {
     event.preventDefault();
-    let { email, password } = loginData;
     dispatch(userLogin(email, password));
   }
 
@@ -52,37 +44,45 @@ function Login() {
     return <Loader></Loader>;
   } else {
     return (
-      <div className="loginSignUpContainer">
+      <div className="login-container">
         <MetaData title={"ShopKaro Sign In"}></MetaData>
-        <div className="loginSignUpBox">
-          <h3>Login</h3>
+        <div className="login-box card">
           <form className="login-form" encType="">
-            <div className="email-box">
-              <MailOutlineIcon />
+            <div class="form-floating mb-3">
               <input
                 type="email"
-                name="email"
+                class="form-control"
+                id="floatingInput"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
                 placeholder="Email"
-                onChange={loginDataChange}
               />
+              <label for="floatingInput">Email</label>
             </div>
-            <div className="password-box">
-              <LockOutlinedIcon />
+            <div class="form-floating">
               <input
                 type="password"
-                name="password"
-                id=""
+                class="form-control"
+                id="floatingPassword"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
                 placeholder="Password"
-                onChange={loginDataChange}
               />
+              <label for="floatingPassword">Password</label>
             </div>
-            <Link to="/password/forget">Forget Password ?</Link>
-            <input
-              type="submit"
-              onClick={(e) => loginSubmit(e)}
-              value="Login"
-            />
+            <div className="login-btn">
+              <button
+                className="btn btn-primary w-100 btn-lg"
+                onClick={(e) => loginSubmit(e)}
+              >
+                Login
+              </button>
+            </div>
           </form>
+          <div className="flex">
+            <Link to="/password/forget">Forgot password?</Link>
+            <Link to="/sign"> Create account</Link>
+          </div>
         </div>
       </div>
     );
@@ -90,3 +90,11 @@ function Login() {
 }
 
 export default Login;
+
+          // <div className="d-flex">
+          //   <h5 style={{ textAlign: "center" }}>ShopKaro</h5>
+          //   <img
+          //     style={{ objectFit: "contain", width: 50 }}
+          //     src={websiteIcon}
+          //   />
+          // </div>;

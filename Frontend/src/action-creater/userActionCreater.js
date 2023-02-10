@@ -18,11 +18,14 @@ import {
   USER_CHANGEPASSWORD_SUCCESS,
   USER_CHANGEPASSWORD_FAIL,
   USER_CHANGEPASSWORD_REQUEST,
+  USER_ADDADDRESS_REQUEST,
+  USER_ADDADDRESS_SUCCESS,
+  USER_ADDADDRESS_FAIL,
 } from "../constants/authenticationConstants";
 import axios from "axios";
 
-export let userLogin = function(email, password) {
-  return async function(dispatch) {
+export let userLogin = function (email, password) {
+  return async function (dispatch) {
     try {
       dispatch({
         type: USER_LOGIN_REQUEST,
@@ -49,21 +52,44 @@ export let userLogin = function(email, password) {
   };
 };
 
-export let userSignUp = function(data) {
-  return async function(dispatch) {
+export let userSignUp = function (name, email, password, avatar) {
+  return async function (dispatch) {
     try {
       dispatch({
         type: USER_SIGNUP_REQUEST,
       });
 
+      let formData = new FormData();
+      formData.set("name", name);
+      formData.set("email", email);
+      formData.set("password", password);
+      if (avatar) {
+        let imageBob = await new Promise((resolve, reject) => {
+          let reader = new FileReader();
+          reader.readAsDataURL(avatar);
+          reader.onload = () => {
+            if (reader.readyState === 2) {
+              resolve(reader.result);
+            }
+          };
+
+          reader.onerror = () => {
+            reject("file is not parser to bob object");
+          };
+        });
+
+        formData.set("avatar", imageBob);
+      }
+
       let URL = "/api/v1/user/register";
-      let response = await axios.post(URL, data);
+      let response = await axios.post(URL, formData);
 
       dispatch({
         type: USER_SIGNUP_SUCCESS,
         payload: response.data,
       });
     } catch (error) {
+      console.log(error);
       dispatch({
         type: USER_SIGNUP_FAIL,
         err: error.response.data,
@@ -72,8 +98,8 @@ export let userSignUp = function(data) {
   };
 };
 
-export let loadUser = function() {
-  return async function(dispatch) {
+export let loadUser = function () {
+  return async function (dispatch) {
     try {
       dispatch({
         type: LOAD_USER_REQUEST,
@@ -95,8 +121,8 @@ export let loadUser = function() {
   };
 };
 
-export let userLogout = function() {
-  return async function(dispatch) {
+export let userLogout = function () {
+  return async function (dispatch) {
     try {
       dispatch({
         type: USER_LOGOUT_REQUEST,
@@ -114,8 +140,8 @@ export let userLogout = function() {
   };
 };
 
-export let updateProfile = function(userInfo) {
-  return async function(dispatch) {
+export let updateProfile = function (userInfo) {
+  return async function (dispatch) {
     try {
       dispatch({
         type: USER_UpdateProfile_REQUEST,
@@ -136,24 +162,24 @@ export let updateProfile = function(userInfo) {
   };
 };
 
-export let cleanError = function(type) {
-  return function(dispatch) {
+export let cleanError = function (type) {
+  return function (dispatch) {
     dispatch({
       type: type,
     });
   };
 };
 
-export let updateReset = function(type) {
-  return function(dispatch) {
+export let updateReset = function (type) {
+  return function (dispatch) {
     dispatch({
       type: type,
     });
   };
 };
 
-export let changePassword = function(info) {
-  return async function(dispatch) {
+export let changePassword = function (info) {
+  return async function (dispatch) {
     try {
       dispatch({
         type: USER_CHANGEPASSWORD_REQUEST,
@@ -173,8 +199,32 @@ export let changePassword = function(info) {
   };
 };
 
-export let forgetPassword = function(info) {
-  return async function(dispatch) {};
+export let addAddress = function (address) {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: USER_ADDADDRESS_REQUEST,
+      });
+
+      let url = "/api/v1/user/address";
+      let response = await axios.post(url, address);
+
+      dispatch({
+        type: USER_ADDADDRESS_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: USER_ADDADDRESS_FAIL,
+        payload: error.response.data,
+      });
+    }
+  };
+};
+
+export let forgetPassword = function (info) {
+  return async function (dispatch) {};
 };
 
 export let cartActionCreater;

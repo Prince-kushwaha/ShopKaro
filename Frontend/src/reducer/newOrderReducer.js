@@ -5,7 +5,7 @@ import {
   Order_ErrorClean,
 } from "../constants/orderConstansts";
 
-let newOrderReducer = function(state = {}, action) {
+let newOrderReducer = function (state = {}, action) {
   switch (action.type) {
     case Create_Order_Request:
       return {

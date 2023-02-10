@@ -6,7 +6,7 @@
   display: flex;
 }
 
-.loginSignUpContainer {
+.profileUpdateContainer {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -14,7 +14,7 @@
   background-color: antiquewhite;
 }
 
-.loginSignUpBox {
+.profileUpdateBox {
   padding: 40px 10px;
   background-color: whitesmoke;
   width: 30vmax;
@@ -58,8 +58,8 @@
   margin: 0 5px;
 }
 
-.login-form > input[type="submit"],
-.signUp-form input[type="submit"] {
+.profileUpdate-form > input[type="submit"],
+.profile-form input[type="submit"] {
   margin: 20px;
   padding: 10px 20px;
   width: 90%;
@@ -69,46 +69,46 @@
   cursor: pointer;
 }
 
-.login-form {
+.profileUpdate-form {
   position: relative;
 }
 
-.login-form > a {
+.profileUpdate-form > a {
   display: inline;
   position: relative;
   left: 63%;
 }
 
-.login-form {
+.profileUpdate-form {
   margin: 70px 0 50px 0;
 }
 
-.sign-profileImage > img {
+.profileImage > img {
   height: 25px;
 }
 
 .name-box,
-.sign-email-box,
-.sign-password-box,
-.sign-profileImage {
+.email-box,
+.password-box,
+.profileImage {
   display: flex;
   align-items: center;
   margin: 20px;
 }
 .name-box > input,
-.sign-email-box > input,
-.sign-password-box > input {
+.email-box > input,
+.password-box > input {
   width: 100%;
   padding: 10px 30px;
 }
 
 .name-box > svg,
-.sign-email-box > svg,
-.sign-password-box > svg {
+.email-box > svg,
+.password-box > svg {
   position: absolute;
   margin: 0 5px;
 }
 
-.loginSignUpBox > h3 {
+.profileUpdateBox > h3 {
   text-align: center;
 }

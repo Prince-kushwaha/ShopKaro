@@ -28,11 +28,13 @@ const productSchema = new Schema({
     required: [true, "please enter product description"],
   },
 
+  offers: [],
+  info: [],
+  specifications: [],
   images: [
     {
       public_id: {
         type: String,
-        required: true,
       },
       url: {
         type: String,
@@ -41,11 +43,15 @@ const productSchema = new Schema({
     },
   ],
 
+  discount: {
+    type: Number,
+    required: true,
+  },
+
   reviews: [
     {
       user: {
         type: mongoose.Schema.ObjectId,
-        required: true,
         ref: "EUser",
         unique: true,
       },
@@ -57,6 +63,10 @@ const productSchema = new Schema({
       rating: {
         type: Number,
         required: true,
+      },
+
+      status: {
+        type: String,
       },
 
       comment: {

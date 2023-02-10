@@ -8,8 +8,6 @@ const cloundary = require("cloudinary");
 // register user
 const registerUser = catchAsyncError(async function (req, resp, next) {
   let { email, name, password, avatar } = req.body;
-  avatar = avatar || req.files.avatar;
-  
   if (!validator.isStrongPassword(password)) {
     return next(
       new ErrorHandler(
@@ -18,10 +16,11 @@ const registerUser = catchAsyncError(async function (req, resp, next) {
       )
     );
   }
-  
+
   let userData;
 
   if (avatar) {
+    avatar = avatar || req.files.avatar;
     let image = await cloundary.v2.uploader.upload(avatar, {
       folder: "avatars",
       width: 150,
@@ -291,6 +290,32 @@ const deleteProductReview = catchAsyncError(async function (req, resp, next) {
   });
 });
 
+let addAddress = catchAsyncError(async function (req, resp, next) {
+  let user = req.user;
+  let address = req.body;
+
+  if (!address.name) {
+    return next(new ErrorHandler(401, "Enter Full Name "));
+  } else if (!address.mobile) {
+    return next(new ErrorHandler(401, "Enter Mobile Number "));
+  } else if (!address.pinCode) {
+    return next(new ErrorHandler(401, "Enter PinCode"));
+  } else if (!address.city) {
+    return next(new ErrorHandler(401, "Enter city"));
+  } else if (!address.state) {
+    return next(new ErrorHandler(401, "Enter state"));
+  } else if (!address.area) {
+    return next(new ErrorHandler(401, "Enter area"));
+  }
+
+  user.address.push(address);
+  user = await user.save();
+  resp.status(201).json({
+    success: true,
+    user,
+  });
+});
+
 module.exports.registerUser = registerUser;
 module.exports.updateUser = updateUser;
 module.exports.deleteUser = deleteUser;
@@ -303,3 +328,4 @@ module.exports.getUserDetailsByAdmin = getUserDetailsByAdmin;
 module.exports.updateUserRole = updateUserRole;
 module.exports.addProductReview = addProductReview;
 module.exports.deleteProductReview = deleteProductReview;
+module.exports.addAddress = addAddress;

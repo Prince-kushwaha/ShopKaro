@@ -1,12 +1,7 @@
 .search {
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.products {
-  display: flex;
-  flex-basis: 80%;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  column-gap: 5px;
 }
 
 .pagination {
@@ -41,51 +36,37 @@
   color: white;
 }
 
-.filter-box {
-  padding: 20px;
-  margin-top: 50px;
-  flex-basis: 20%;
+div.filter-box {
+  margin: 6px 5px;
+  padding: 20px 30px;
 }
 
-.filter-box h3 {
-  margin: 5px 0;
+div.products {
+  margin: 6px 5px;
 }
 
-.price-box p {
-  font-style: italic;
+div.filter-box ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.price-box li {
-  list-style: none;
-  width: fit-content;
+div.filter-box li:hover {
+  color: lightblue;
+}
+
+div.filter-box li:active {
+  color: blue;
+}
+
+div.filter-box li {
   cursor: pointer;
 }
 
-.price-box li:hover {
-  background-color: bisque;
+div.star-ratings:hover {
+  background-color: lightblue;
 }
 
-.category-box li {
-  list-style: none;
-  width: fit-content;
-  cursor: pointer;
+div.star-ratings:active {
+  background-color: blue;
 }
 
-.category-box li:hover {
-  background-color: bisque;
-}
-
-.rating-box {
-  display: flex;
-  flex-direction: column;
-}
-.rating-box li {
-  list-style: none;
-}
-.star-ratings {
-  cursor: pointer;
-}
-
-.star-ratings:hover {
-  background-color: antiquewhite;
-}

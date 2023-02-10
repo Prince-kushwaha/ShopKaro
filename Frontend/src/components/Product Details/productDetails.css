@@ -1,119 +1,155 @@
-.product-card {
-  padding: 1rem;
-  box-sizing: border-box;
-  border-width: 0.1rem;
-  border-style: solid;
-}
-
-.product-details {
-  display: flex;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.product-images {
-  flex-basis: 50%;
-  border: 0.1rem solid whitesmoke;
-}
-
-.product-detail {
-  flex-basis: 50%;
-  padding: 1rem;
-  border: 2px solid whitesmoke;
-}
-
-.carousel-image {
-  width: 100%;
-  height: 100%;
-}
-
-.product-reviews > h2 {
-  text-align: center;
-}
-
-.review {
-  max-width: 20rem;
-  border: 2px;
-  display: flex;
-  padding: 2rem;
-  flex-direction: column;
+div.offer-item {
+  display: grid;
+  grid-template-columns: max-content auto;
   align-items: center;
-  border-style: solid;
+  column-gap: 10px;
 }
 
-.review > img {
-  height: 6rem;
-  width: 6rem;
+div.offer-item > li {
+  list-style: none;
+  display: inline;
 }
 
-.reviews {
-  margin: 2rem 0;
-  display: flex;
-  justify-content: space-evenly;
-  gap: 2rem;
-  flex-wrap: wrap;
+div.offer-item > li > span {
+  font-size: 17px;
+  font-weight: 500;
 }
 
-.detailBlock-1 p {
-  margin: 10px 0;
+div.offer-item > li > p {
+  display: inline;
 }
 
-.detailBlock-2 {
-  margin: 10px 0;
+div.product-prices > p {
+  color: #388e3c;
+  font-weight: 400;
+  font-size: 17px;
+  margin: 0;
 }
 
-.detailBlock-3 {
-  margin: 16px 0;
-}
-
-.btn {
-  height: 25px;
-}
-
-.detailBlock-3 button {
-  width: 20px;
-}
-
-.detailBlock-3 input[type="number"] {
-  display: inline-block;
-  max-width: 40px;
-  box-sizing: border-box;
-}
-
-.detailBlock-3 input[type="button"] {
-  width: 120px;
-  border-radius: 20px;
-  margin: 0 16px;
-  background-color: red;
-}
-
-.detailBlock-4 button {
-  border-radius: 20px;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: red;
-}
-
-.detailBlock-3 > h3 {
-  margin: 14px 0;
+div.product-prices :nth-child(2) {
   font-size: 30px;
+  font-weight: 600;
 }
 
-.product-detail > p {
-  margin: 16px 0;
+div.product-prices :nth-child(3) {
+  margin: 10px;
+  font-size: 20px;
+  color: #878787;
+}
+
+.product-info {
+  min-height: 100vh;
+}
+
+div.col-6 > p {
+  font-weight: 500;
   font-size: 20px;
 }
 
-.detailBlock-4 {
-  margin: 16px 0;
+.product-image {
+  object-fit: contain;
+  width: 100%;
+  height: 500px;
 }
 
-@media (max-width: 800px) {
-  .product-details {
-    flex-direction: column;
-  }
+.product-info > div.row > div.col-1,
+.product-info > div.row > div.col-5 {
+  height: max-content;
+  position: sticky;
+  top: 0px;
 }
 
-.review p {
-  font-size: 1rem;
+div.product-description > div {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  column-gap: 2vmax;
+  row-gap: 20px;
+}
+
+div.product-description > div p:first-child {
+  color: #878787;
+}
+
+div.product-color-images img {
+  border-style: dotted;
+  border-width: 3px;
+  border-color: #878787;
+  object-fit: contain;
+  height: 52px;
+  width: 52px;
+  margin: 0 10px;
+}
+
+div.product-description > div.ram,
+div.product-description > div.storage {
+  margin: 20px 0;
+}
+
+div.product-ram > span,
+div.product-storage > span {
+  padding: 10px;
+  border: 2px dotted;
+  border-color: #878787;
+  color: #878787;
+  margin: 0 10px;
+}
+
+.product-highlights > li::marker {
+  color: #878787;
+}
+.product-highlights > li {
+  margin: 10px 0px;
+}
+
+.product-specification > div > div {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  column-gap: 2vmax;
+  row-gap: 20px;
+}
+
+div.Review {
+  padding: 20px;
+  margin: 20px 0px;
+}
+
+.product-rating {
+  display: flex;
+  margin: 5px 0;
+}
+
+.product-rating > span {
+  color: #878787;
+}
+
+.star {
+  background-color: #388e3c;
+  width: max-content;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  border-radius: 2px;
+  color: whitesmoke;
+}
+
+.specification > :first-child {
+  color: #878787;
+}
+
+.btnc-buy-cart {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 5px;
+  margin: 1vmax 0;
+}
+
+div.product-offer {
+  margin: 10px 0px;
+}
+
+.product-small-image > img:hover {
+  border-style: solid;
+  border-color: blue;
+  border-width: 2px;
 }

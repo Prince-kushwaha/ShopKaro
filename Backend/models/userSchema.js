@@ -54,12 +54,12 @@ const userSchema = new Schema({
       },
 
       pinCode: {
-        type: Number,
+        type: String,
         required: true,
       },
 
       mobile: {
-        type: Number,
+        type: String,
         required: true,
       },
 

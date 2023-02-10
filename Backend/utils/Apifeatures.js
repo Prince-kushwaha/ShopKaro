@@ -32,7 +32,7 @@ class ApiFeatures {
     const priceObject = {
       price: {
         $gte: this.queryStr.min_price || 0,
-        $lte: this.queryStr.max_price || 50000,
+        $lte: this.queryStr.max_price || 1000000,
       },
     };
 

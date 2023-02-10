@@ -1,0 +1,29 @@
+div.checkout-box {
+  display: grid;
+  margin: 10px;
+  grid-template-columns: 1fr 0.4fr;
+  column-gap: 2vmax;
+}
+
+div.checkout-products-pricing {
+  position: sticky;
+  top: 0px;
+  height: max-content;
+  background: #fff;
+}
+
+.checkout-products-pricing .card-header > p {
+  color: #878787;
+  margin: 0px;
+  font-weight: 500;
+}
+
+
+.checkout-products-pricing div.card-body > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-products-pricing div.card-body {
+  padding-bottom: 0px;
+}

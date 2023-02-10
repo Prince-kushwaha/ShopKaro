@@ -1,0 +1,7 @@
+div.dropdown-icon {
+  padding-right: 30px;
+}
+
+.dropdown-menu div.dropdown-icon > span {
+  margin-left: 5px;
+}

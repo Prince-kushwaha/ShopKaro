@@ -1,18 +1,21 @@
 import React from "react";
 import "./Profile.css";
-import profileIcon from "../../images/Appstore.png";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import profileIcon from "../../images/Profile.png";
 
 function Profile() {
-  let { user } = useSelector(function(state) {
+  let { user } = useSelector(function (state) {
     return state.login;
   });
-  
+
   return (
     <div className="profile">
       <div className="profile-image">
-        <img src={user.avatar.url}></img>
+        <img
+          alt="profile Image"
+          src={(user.avatar && user.avatar.url) || profileIcon}
+        ></img>
         <Link to="me/update">Edit Profile</Link>
       </div>
       <div className="profile-details">

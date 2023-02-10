@@ -11,7 +11,6 @@ const getAllProduct = catchAsyncError(async (req, resp, next) => {
 
   let products = await searching.query;
   let productCount = products.length;
-
   searching = searching.pagination(resultPerPage);
   products = await searching.query.clone();
 
@@ -55,13 +54,13 @@ const updateProduct = catchAsyncError(async (req, resp, next) => {
   const update = req.body;
 
   const product = await Product.findById({ _id: filter });
-  console.log({product, ...update });
+  console.log({ product, ...update });
 
   if (!product) {
     const error = new ErrorHandler(404, "Product not found");
     next(error);
   } else {
-    await product.update({product, ...update });
+    await product.update({ product, ...update });
 
     resp.status(200).json({
       success: true,
@@ -84,7 +83,6 @@ const getProductDetails = catchAsyncError(async (req, resp, next) => {
     });
   }
 });
-
 
 module.exports.getAllProduct = getAllProduct;
 module.exports.createProduct = createProduct;
