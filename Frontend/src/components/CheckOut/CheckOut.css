@@ -18,7 +18,6 @@ div.checkout-products-pricing {
   font-weight: 500;
 }
 
-
 .checkout-products-pricing div.card-body > div {
   display: flex;
   justify-content: space-between;
@@ -26,4 +25,12 @@ div.checkout-products-pricing {
 
 .checkout-products-pricing div.card-body {
   padding-bottom: 0px;
+}
+
+div.checkout-options {
+  padding: 10px;
+}
+
+div.checkout-options > :last-of-type {
+  margin: 10px 0;
 }

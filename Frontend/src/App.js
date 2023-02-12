@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/layout/Header/Header";
-import Footer from "./components/layout/Footer/Footer";
 import Home from "./components/Home/Home.jsx";
 import "./App.css";
 import ProductDetails from "./components/Product Details/ProductDetails";
@@ -16,10 +15,8 @@ import ProfileUpdate from "./components/user/ProfileUpdate.jsx";
 import ChangePassword from "./components/user/ChangePassword";
 import PasswordForget from "./components/user/PasswordForget";
 import Cart from "./components/Cart/Cart";
-import Shipping from "./components/Cart/Shipping";
-import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import axios from "axios";
-import Payment from "./components/Cart/Payment";
+import Payment from "./components/CheckOut/Payment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./components/Cart/OrderSuccess";
@@ -27,7 +24,6 @@ import MyOrders from "./components/Order/MyOrders";
 import OrderDetails from "./components/Order/OrderDetails";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { useSelector } from "react-redux";
 import CheckOut from "./components/CheckOut/CheckOut";
 
 function App() {
@@ -85,22 +81,6 @@ function App() {
             element={
               <RequireAuth>
                 <Profile />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/shipping"
-            element={
-              <RequireAuth>
-                <Shipping />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="/order/confirm"
-            element={
-              <RequireAuth>
-                <ConfirmOrder />
               </RequireAuth>
             }
           ></Route>

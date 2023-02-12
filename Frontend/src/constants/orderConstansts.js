@@ -10,3 +10,7 @@ export let OrderDetail_Request = "OrderDetail_Request";
 export let OrderDetail_Fail = "OrderDetail_Fail";
 export let OrderDetail_Success = "OrderDetail_Success";
 export let OrderDetail_CleanError = "OrderDetail_CleanError";
+export let processOrder = "processOrder";
+export let UPDATE_CreateOrder_ITEM_QUANTITY =
+  "UPDATE_CreateOrder_ITEM_QUANTITY";
+export let REMOVE_CreateOrder_Item = "REMOVE_CreateOrder_Item";

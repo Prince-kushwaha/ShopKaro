@@ -1,0 +1,16 @@
+div.shipping-container {
+  padding: 20px;
+}
+
+div.address-content > div.box {
+  display: flex;
+}
+
+div.address-content > div.box > h6 {
+  margin-left: 5px;
+}
+
+div.address-box {
+  padding: 15px 10px 10px 10px;
+  margin: 10px;
+}

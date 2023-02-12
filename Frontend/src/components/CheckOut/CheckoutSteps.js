@@ -13,7 +13,7 @@ const CheckoutSteps = ({ activeStep }) => {
       icon: <LocalShipping />,
     },
     {
-      label: <Typography>Confirm Order</Typography>,
+      label: <Typography>Order Summary</Typography>,
       icon: <LibraryAddCheck />,
     },
     {

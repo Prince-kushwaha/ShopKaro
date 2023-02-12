@@ -4,10 +4,13 @@ import CartItemCard from "./CartItemCard";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../layout/Loader/Loader";
 import cartImage from "../../images/cartImage.webp";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import MetaData from "../MetaData";
+import { processOrderActionCreater } from "../../action-creater/orderActionCreater";
 
 function Cart() {
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
   let [grossTotal, setGrossTotal] = useState(0);
   let [totalDiscount, setTotalDiscout] = useState(0);
   let cart = useSelector(function (state) {
@@ -31,6 +34,12 @@ function Cart() {
     },
     [cartItems, cart]
   );
+
+  function placeOrder() {
+    let orderItems = cartItems;
+    dispatch(processOrderActionCreater({ orderItems }));
+    navigate("/checkOut");
+  }
 
   if (cartItems.length === 0) {
     return (
@@ -77,7 +86,10 @@ function Cart() {
                 </div>
               </div>
               <div class="card-footer bg-transparent ">
-                <button className="btn w-100 btn-warning btn-lg">
+                <button
+                  onClick={placeOrder}
+                  className="btn w-100 btn-warning btn-lg"
+                >
                   Place Order
                 </button>
               </div>

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.5007840b.css",
-    "main.js": "/static/js/main.23b11625.js",
+    "main.css": "/static/css/main.74a6625d.css",
+    "main.js": "/static/js/main.c8da7ed9.js",
     "static/media/top1.jpg": "/static/media/top1.80dcbc86ace2eac0b070.jpg",
     "static/media/roboto-all-500-normal.woff": "/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
@@ -10,7 +10,6 @@
     "static/media/cartImage.webp": "/static/media/cartImage.3803b8cb2cbd63ef9b15.webp",
     "static/media/favicon.png": "/static/media/favicon.deb07841d2cffdc256b4.png",
     "static/media/Profile.png": "/static/media/Profile.697fdcd21f6d157b9073.png",
-    "static/media/playstore.png": "/static/media/playstore.82b4831979e0ce7c733e.png",
     "static/media/roboto-latin-500-normal.woff2": "/static/media/roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2",
     "static/media/roboto-latin-700-normal.woff2": "/static/media/roboto-latin-700-normal.227c93190fe7f82de3f8.woff2",
     "static/media/roboto-latin-400-normal.woff2": "/static/media/roboto-latin-400-normal.b009a76ad6afe4ebd301.woff2",
@@ -18,7 +17,6 @@
     "static/media/roboto-cyrillic-ext-400-normal.woff2": "/static/media/roboto-cyrillic-ext-400-normal.804378952da8a10faae2.woff2",
     "static/media/roboto-cyrillic-ext-300-normal.woff2": "/static/media/roboto-cyrillic-ext-300-normal.4777461b144e55145268.woff2",
     "static/media/roboto-cyrillic-ext-500-normal.woff2": "/static/media/roboto-cyrillic-ext-500-normal.62ced72e5832f02c2796.woff2",
-    "static/media/Appstore.png": "/static/media/Appstore.d0c5839937e3c36285f6.png",
     "static/media/roboto-cyrillic-ext-700-normal.woff2": "/static/media/roboto-cyrillic-ext-700-normal.be4d02458ce53887dc37.woff2",
     "static/media/roboto-latin-ext-400-normal.woff2": "/static/media/roboto-latin-ext-400-normal.861b791f9de857a6e7bc.woff2",
     "static/media/roboto-latin-ext-700-normal.woff2": "/static/media/roboto-latin-ext-700-normal.ed67ad54b1a8f5d21150.woff2",
@@ -41,11 +39,11 @@
     "static/media/roboto-greek-ext-300-normal.woff2": "/static/media/roboto-greek-ext-300-normal.35b9d6be04b95f0f0530.woff2",
     "static/media/roboto-greek-ext-700-normal.woff2": "/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/index.html",
-    "main.5007840b.css.map": "/static/css/main.5007840b.css.map",
-    "main.23b11625.js.map": "/static/js/main.23b11625.js.map"
+    "main.74a6625d.css.map": "/static/css/main.74a6625d.css.map",
+    "main.c8da7ed9.js.map": "/static/js/main.c8da7ed9.js.map"
   },
   "entrypoints": [
-    "static/css/main.5007840b.css",
-    "static/js/main.23b11625.js"
+    "static/css/main.74a6625d.css",
+    "static/js/main.c8da7ed9.js"
   ]
 }

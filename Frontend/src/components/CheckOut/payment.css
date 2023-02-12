@@ -1,0 +1,32 @@
+div.payment-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+div.payment-form {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+}
+
+div.input-box {
+  display: grid;
+  grid-template-columns: max-content auto;
+  column-gap: 1rem;
+  align-items: center;
+  padding: 10px;
+  margin: 1rem 0;
+}
+
+.payment-btn {
+  border: none;
+  background-color: tomato;
+  color: white;
+  font: 300 0.9vmax "Roboto";
+  padding: 0.8vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  outline: none;
+}

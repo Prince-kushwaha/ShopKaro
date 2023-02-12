@@ -10,6 +10,9 @@ import {
   OrderDetail_Request,
   OrderDetail_Success,
   Order_ErrorClean,
+  processOrder,
+  REMOVE_CreateOrder_Item,
+  UPDATE_CreateOrder_ITEM_QUANTITY,
 } from "../constants/orderConstansts";
 
 export let createOrder = function (order) {
@@ -57,6 +60,38 @@ export function getOrderDetails(orderId) {
     }
   };
 }
+
+export let processOrderActionCreater = function (info) {
+  return function (dispatch) {
+    dispatch({
+      type: processOrder,
+      payload: info,
+    });
+  };
+};
+
+export let UpdateCreateOrdertItemQuantity = function (id, quantity) {
+  return function (dispatch) {
+    dispatch({
+      type: UPDATE_CreateOrder_ITEM_QUANTITY,
+      payload: {
+        id: id,
+        quantity,
+      },
+    });
+  };
+};
+
+export let RemoveCreateOrderItemAction = function (id) {
+  return function (dispatch) {
+    dispatch({
+      type: REMOVE_CreateOrder_Item,
+      payload: {
+        id,
+      },
+    });
+  };
+};
 
 export let clearErrors = function () {
   return function (dispatch) {

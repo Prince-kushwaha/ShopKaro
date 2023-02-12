@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProductDetail } from "../../action-creater/productsActionCreater";
@@ -12,12 +12,12 @@ import "react-awesome-slider/dist/styles.css";
 import { addCartItemAction } from "../../action-creater/cartActionCreater";
 import MetaData from "../MetaData";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import { ToastContainer } from "react-toastify";
+import { processOrderActionCreater } from "../../action-creater/orderActionCreater";
 
 function ProductDetails() {
   const { id } = useParams();
   let dispatch = useDispatch();
-  let [quantity, setQuantity] = useState(1);
+  let navigate = useNavigate();
   let { loading, error, product } = useSelector(function (state) {
     return state.productDetail;
   });
@@ -30,6 +30,21 @@ function ProductDetails() {
   );
 
   let [currentImage, setcurrentImage] = useState(undefined);
+  function handlebuy() {
+    let orderItems = [
+      {
+        name: product.name,
+        quantity: 1,
+        image: product.images[0].url,
+        id: product._id,
+        price: product.price,
+        discount: product.discount,
+        stock: product.stock,
+      },
+    ];
+    dispatch(processOrderActionCreater({ orderItems }));
+    navigate("/checkOut");
+  }
 
   function handleAddToCart() {
     dispatch(
@@ -91,7 +106,12 @@ function ProductDetails() {
                 </button>
               </div>
               <div>
-                <button className="btn w-100 btn-danger btn-lg">Buys</button>
+                <button
+                  onClick={handlebuy}
+                  className="btn w-100 btn-danger btn-lg"
+                >
+                  Buys
+                </button>
               </div>
             </div>
           </div>

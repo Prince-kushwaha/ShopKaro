@@ -15,9 +15,10 @@ import {
 } from "./reducer/authenticationReducer";
 import { forgetPasswordReducer } from "./reducer/authenticationReducer";
 import { cartReducer } from "./reducer/cartReducer";
-import newOrderReducer from "./reducer/newOrderReducer";
+import newOrderReducer, { processOrderReducer } from "./reducer/newOrderReducer";
 import OrderReducer, { OrderDetailReducer } from "./reducer/orderReducer";
 import { CreateReviewReducer } from "./reducer/reviewReducer";
+import { processOrder } from "./constants/orderConstansts";
 
 let reducer = combineReducers({
   products: productReducer,
@@ -31,6 +32,7 @@ let reducer = combineReducers({
   myOrders: OrderReducer,
   orderDetails: OrderDetailReducer,
   review: CreateReviewReducer,
+  createOrder: processOrderReducer,
 });
 
 let cartItems = localStorage.getItem("cartItems")

@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useRef } from "react";
-import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
-import MetaData from "../../components/MetaData";
-import { Typography } from "@mui/material";
+import MetaData from "../MetaData";
 import {
   CardNumberElement,
   CardCvcElement,
@@ -21,31 +19,24 @@ import {
   clearErrors,
 } from "../../action-creater/orderActionCreater";
 import { useNavigate } from "react-router-dom";
+import Toast from "../../Toast";
 
 const Payment = () => {
   let navigate = useNavigate();
-  const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+  let order = useSelector(function (state) {
+    return state.createOrder;
+  });
 
   const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
   const payBtn = useRef(null);
 
-  const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.login);
   const { error: err } = useSelector((state) => state.newOrder);
 
   const paymentData = {
-    amount: Math.round(orderInfo.totalPrice * 100),
-  };
-
-  const order = {
-    shippingInfo,
-    orderItems: cartItems,
-    itemsPrice: orderInfo.subtotal,
-    taxPrice: orderInfo.tax,
-    shippingPrice: orderInfo.shippingCharges,
-    totalPrice: orderInfo.totalPrice,
+    amount: 0,
   };
 
   const submitHandler = async (e) => {
@@ -75,13 +66,6 @@ const Payment = () => {
           billing_details: {
             name: user.name,
             email: user.email,
-            address: {
-              line1: shippingInfo.address,
-              city: shippingInfo.city,
-              state: shippingInfo.state,
-              postal_code: shippingInfo.pinCode,
-              country: shippingInfo.country,
-            },
           },
         },
       });
@@ -114,7 +98,7 @@ const Payment = () => {
 
   useEffect(() => {
     if (err) {
-      alert(err);
+      Toast(err, "error");
       dispatch(clearErrors());
     }
   }, [dispatch, err]);
@@ -122,30 +106,30 @@ const Payment = () => {
   return (
     <Fragment>
       <MetaData title="Payment" />
-      <CheckoutSteps activeStep={2} />
-      <div className="paymentContainer">
-        <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-          <Typography>Card Info</Typography>
-          <div>
-            <CreditCardIcon />
-            <CardNumberElement className="paymentInput" />
+      <div className="payment-container">
+        <div className="payment-box">
+          <div className="payment-form">
+            <h4>Card Info</h4>
+            <div className="input-box form-control">
+              <CreditCardIcon />
+              <CardNumberElement className="payment-input" />
+            </div>
+            <div className="input-box form-control">
+              <EventIcon />
+              <CardExpiryElement className="payment-input" />
+            </div>
+            <div className="input-box form-control">
+              <VpnKeyIcon />
+              <CardCvcElement className="payment-input" />
+            </div>
+            <input
+              type="submit"
+              value={`Pay - ₹${0}`}
+              ref={payBtn}
+              className="payment-btn btn"
+            />
           </div>
-          <div>
-            <EventIcon />
-            <CardExpiryElement className="paymentInput" />
-          </div>
-          <div>
-            <VpnKeyIcon />
-            <CardCvcElement className="paymentInput" />
-          </div>
-
-          <input
-            type="submit"
-            value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}
-            ref={payBtn}
-            className="paymentFormBtn"
-          />
-        </form>
+        </div>
       </div>
     </Fragment>
   );

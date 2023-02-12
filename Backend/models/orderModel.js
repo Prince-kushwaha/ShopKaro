@@ -20,25 +20,16 @@ const orderSchema = new Schema({
         default: 1,
       },
 
-      images: {
-        public_id: {
-          type: String,
-          default: "image",
-          required: true,
-        },
-        url: {
-          type: String,
-          default: "url",
-          required: true,
-        },
-      },
-
-      product: {
+      id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
       },
 
       price: {
+        type: Number,
+        required: true,
+      },
+      discount: {
         type: Number,
         required: true,
       },
@@ -58,7 +49,12 @@ const orderSchema = new Schema({
     },
 
     pinCode: {
-      type: Number,
+      type: String,
+      required: true,
+    },
+
+    mobile: {
+      type: String,
       required: true,
     },
 
@@ -72,12 +68,11 @@ const orderSchema = new Schema({
       required: true,
     },
 
-    phone: {
-      type: Number,
-      required: true,
+    houseNumber: {
+      type: String,
     },
 
-    address: {
+    area: {
       type: String,
       required: true,
     },
