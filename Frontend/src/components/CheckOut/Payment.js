@@ -20,11 +20,21 @@ import {
 } from "../../action-creater/orderActionCreater";
 import { useNavigate } from "react-router-dom";
 import Toast from "../../Toast";
+import Loader from "../layout/Loader/Loader";
 
-const Payment = () => {
+const Payment = ({
+  totalPayable,
+  totalDiscount,
+  totalItemPrice,
+  shippingPrice,
+}) => {
   let navigate = useNavigate();
   let order = useSelector(function (state) {
     return state.createOrder;
+  });
+
+  let { loading, newOrder, err } = useSelector(function (state) {
+    return state.newOrder;
   });
 
   const dispatch = useDispatch();
@@ -33,10 +43,9 @@ const Payment = () => {
   const payBtn = useRef(null);
 
   const { user } = useSelector((state) => state.login);
-  const { error: err } = useSelector((state) => state.newOrder);
 
   const paymentData = {
-    amount: 0,
+    amount: totalPayable,
   };
 
   const submitHandler = async (e) => {
@@ -50,6 +59,7 @@ const Payment = () => {
           "Content-Type": "application/json",
         },
       };
+
       const { data } = await axios.post(
         "/api/v1/payment/process",
         paymentData,
@@ -73,7 +83,7 @@ const Payment = () => {
       if (result.error) {
         payBtn.current.disabled = false;
 
-        alert(result.error.message);
+        Toast(result.error.message, "error");
       } else {
         if (result.paymentIntent.status === "succeeded") {
           order.paymentInfo = {
@@ -83,16 +93,20 @@ const Payment = () => {
             paymentDate: Date.now(),
           };
 
+          order.totalDiscount = totalDiscount;
+          order.shippingPrice = shippingPrice;
+          order.totalItemPrice = totalItemPrice;
+          order.totalPayable = totalPayable;
           dispatch(createOrder(order));
-
-          navigate("/success");
+          payBtn.current.disabled = false;
         } else {
-          alert("There's some issue while processing payment ");
+          Toast("There's some issue while processing payment", "error");
+          payBtn.current.disabled = false;
         }
       }
     } catch (error) {
       payBtn.current.disabled = false;
-      alert(error.response.data.message);
+      Toast(error.response.data.message, "error");
     }
   };
 
@@ -103,36 +117,46 @@ const Payment = () => {
     }
   }, [dispatch, err]);
 
-  return (
-    <Fragment>
-      <MetaData title="Payment" />
-      <div className="payment-container">
-        <div className="payment-box">
-          <div className="payment-form">
-            <h4>Card Info</h4>
-            <div className="input-box form-control">
-              <CreditCardIcon />
-              <CardNumberElement className="payment-input" />
+  useEffect(() => {
+    if (newOrder) {
+      navigate("/success");
+    }
+  }, [newOrder]);
+
+  if (loading) {
+    return <Loader />;
+  } else
+    return (
+      <Fragment>
+        <MetaData title="Payment" />
+        <div className="payment-container">
+          <div className="payment-box">
+            <div className="payment-form">
+              <h4>Card Info</h4>
+              <div className="input-box form-control">
+                <CreditCardIcon />
+                <CardNumberElement className="payment-input" />
+              </div>
+              <div className="input-box form-control">
+                <EventIcon />
+                <CardExpiryElement className="payment-input" />
+              </div>
+              <div className="input-box form-control">
+                <VpnKeyIcon />
+                <CardCvcElement className="payment-input" />
+              </div>
+              <input
+                type="submit"
+                value={`Pay - ₹${0}`}
+                ref={payBtn}
+                onClick={submitHandler}
+                className="payment-btn btn"
+              />
             </div>
-            <div className="input-box form-control">
-              <EventIcon />
-              <CardExpiryElement className="payment-input" />
-            </div>
-            <div className="input-box form-control">
-              <VpnKeyIcon />
-              <CardCvcElement className="payment-input" />
-            </div>
-            <input
-              type="submit"
-              value={`Pay - ₹${0}`}
-              ref={payBtn}
-              className="payment-btn btn"
-            />
           </div>
         </div>
-      </div>
-    </Fragment>
-  );
+      </Fragment>
+    );
 };
 
 export default Payment;

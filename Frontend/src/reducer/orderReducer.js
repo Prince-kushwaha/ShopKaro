@@ -49,8 +49,8 @@ export function OrderDetailReducer(state = {}, action) {
       };
     case OrderDetail_Fail:
       return {
-        loading: false,
         ...state,
+        loading: false,
         error: action.payload,
       };
     case OrderDetail_CleanError:

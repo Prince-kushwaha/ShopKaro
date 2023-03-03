@@ -25,6 +25,7 @@ import OrderDetails from "./components/Order/OrderDetails";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import CheckOut from "./components/CheckOut/CheckOut";
+import Address from "./components/user/Address";
 
 function App() {
   let [stripeApiKey, setStripeApiKey] = useState("");
@@ -125,6 +126,15 @@ function App() {
             element={
               <RequireAuth>
                 <CheckOut />
+              </RequireAuth>
+            }
+          ></Route>
+
+          <Route
+            path="/address"
+            element={
+              <RequireAuth>
+                <Address />
               </RequireAuth>
             }
           ></Route>

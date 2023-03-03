@@ -18,7 +18,7 @@ let newOrderReducer = function (state = {}, action) {
     case Create_Order_Success:
       return {
         loading: false,
-        order: action.payload,
+        newOrder: action.payload,
       };
     case Create_Order_Fail:
       return {
@@ -47,7 +47,7 @@ export let processOrderReducer = function (state = {}, action) {
       newOrderItems = state.orderItems.filter(function (item) {
         return productId !== item.id;
       });
-      
+
       newState = { ...state, orderItems: newOrderItems };
       toast("product removed", "success");
       return newState;
@@ -61,7 +61,7 @@ export let processOrderReducer = function (state = {}, action) {
         }
       }
 
-      toast("product qnty update", "success");
+      toast("product qaunality update", "success");
       return newState;
     default:
       return state;

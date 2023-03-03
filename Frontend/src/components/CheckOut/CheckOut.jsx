@@ -55,7 +55,12 @@ function CheckOut() {
           )}
           {currentCompopent === 2 && stripeApiKey && (
             <Elements stripe={loadStripe(stripeApiKey)}>
-              <Payment />
+              <Payment
+                totalDiscount={totalDiscount}
+                totalPayable={grossTotal - totalDiscount + delivery}
+                totalItemPrice={grossTotal}
+                shippingPrice={delivery}
+              />
             </Elements>
           )}
         </div>

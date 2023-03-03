@@ -1,48 +1,23 @@
-.profile {
-  margin: 20px;
-  display: flex;
-  flex-direction: row;
+div.my-profile-box {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 20px;
 }
 
-.profile-image {
-  flex-basis: 50%;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+div.my-profile-container {
+  margin: 10px 100px;
 }
 
-.profile-details {
-  flex-basis: 50%;
-  flex-direction: column;
-  align-items: center;
-}
-
-.profile-details > a {
-  width: 50%;
-  display: block;
-  padding: 8px;
-  background-color: darksalmon;
-  color: white;
-  margin: 10px 0;
-  text-align: center;
-}
-
-.profile-image > img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-}
-
-.profile-image > a {
-  margin: 20px;
-  width: 200px;
-  background-color: orange;
-  text-align: center;
-  color: white;
+div.my-profile-box div.row {
   padding: 10px;
 }
 
-.profile-details > div {
-  margin: 20px 0px;
+div.my-profile-box img {
+  object-fit: contain;
+  height: 60px;
+}
+
+div.my-profile-box > div :hover {
+  background-color:  rgba(86, 247, 12, 0.861);
 }

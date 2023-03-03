@@ -115,7 +115,7 @@ const orderSchema = new Schema({
     required: true,
   },
 
-  itemsPrice: {
+  totalItemPrice: {
     type: Number,
     required: true,
   },
@@ -131,7 +131,12 @@ const orderSchema = new Schema({
     default: 0,
   },
 
-  totalPrice: {
+  totalPayable: {
+    type: Number,
+    required: true,
+  },
+
+  totalDiscount: {
     type: Number,
     required: true,
   },

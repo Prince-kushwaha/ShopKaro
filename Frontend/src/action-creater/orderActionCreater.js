@@ -55,7 +55,6 @@ export function getOrderDetails(orderId) {
       let { data } = await axios.get(`/api/v1/order/me/${orderId}`);
       dispatch({ type: OrderDetail_Success, payload: data.order });
     } catch (error) {
-      alert(error.response.data);
       dispatch({ type: OrderDetail_Fail, payload: error.response });
     }
   };
@@ -95,8 +94,8 @@ export let RemoveCreateOrderItemAction = function (id) {
 
 export let clearErrors = function () {
   return function (dispatch) {
-    // dispatch({
-    //   type: Order_ErrorClean,
-    // });
+    dispatch({
+      type: Order_ErrorClean,
+    });
   };
 };

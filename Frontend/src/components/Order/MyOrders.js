@@ -1,112 +1,94 @@
-import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import Toast from "../../Toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getMyOrders } from "../../action-creater/orderActionCreater";
+import Loader from "../layout/Loader/Loader";
 import "./myOrders.css";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  clearErrors,
-  getMyOrders,
-} from "../../action-creater/orderActionCreater";
-import Loader from "../../components/layout/Loader/Loader";
-import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
-import MetaData from "../MetaData";
-import { Launch } from "@mui/icons-material";
+import axios from "axios";
+import MetaData from "./../MetaData";
 
-const MyOrders = () => {
-  const dispatch = useDispatch();
-
-  const { loading, error, orders } = useSelector((state) => state.myOrders);
-  const { user } = useSelector((state) => state.login);
-
-  const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
-
-    {
-      field: "status",
-      headerName: "Status",
-      minWidth: 150,
-      flex: 0.5,
-      cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
-      },
-    },
-    {
-      field: "itemsQty",
-      headerName: "Items Qty",
-      type: "number",
-      minWidth: 150,
-      flex: 0.3,
-    },
-
-    {
-      field: "amount",
-      headerName: "Amount",
-      type: "number",
-      minWidth: 270,
-      flex: 0.5,
-    },
-
-    {
-      field: "actions",
-      flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <Link to={`/order/${params.getValue(params.id, "id")}`}>
-            <Launch />
-          </Link>
-        );
-      },
-    },
-  ];
-  const rows = [];
-
-  orders &&
-    orders.forEach((item, index) => {
-      rows.push({
-        itemsQty: item.orderItems.length,
-        id: item._id,
-        status: item.orderStatus,
-        amount: item.totalPrice,
-      });
-    });
+function Order({ order }) {
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
+  let [product, setProduct] = useState(undefined);
+  function handleClickOnProduct() {
+    let url = "/order/" + order._id;
+    navigate(url);
+  }
 
   useEffect(() => {
-    if (error) {
-      alert(error);
-      dispatch(clearErrors());
+    try {
+      (async function () {
+        let { data } = await axios.get(
+          "/api/v1/product/" + order.orderItems[0].id
+        );
+        setProduct(data.product);
+      })();
+    } catch (error) {
+      Toast(error.data);
     }
+  }, []);
 
-    dispatch(getMyOrders());
-  }, [dispatch, alert, error]);
-
-  return (
-    <Fragment>
-      <MetaData title={`${user.name} - Orders`} />
-
-      {loading ? (
-        <Loader />
-      ) : (
-        <div className="myOrdersPage">
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            className="myOrdersTable"
-            autoHeight
-          />
-
-          <Typography id="myOrdersHeading">{user.name}'s Orders</Typography>
+  if (!product) {
+    return (
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    );
+  } else {
+    return (
+      <section className="order-card card mb-3" onClick={handleClickOnProduct}>
+        <div className="">
+          <div className="order-product-image">
+            <img src={product.images[0].url} />
+          </div>
+          <div className="highlights">
+            <p>{order.orderItems[0].name.substr(0, 80)}</p>
+          </div>
+          <div className="price">
+            <span>₹{order.orderItems[0].price}</span>
+          </div>
+          <div className="order-status text-center">
+            <h6>{order.orderStatus}</h6>
+          </div>
         </div>
-      )}
-    </Fragment>
-  );
-};
+      </section>
+    );
+  }
+}
+
+function MyOrders() {
+  let dispatch = useDispatch();
+
+  let { loading, orders, err } = useSelector(function (state) {
+    return state.myOrders;
+  });
+
+  useEffect(() => {
+    dispatch(getMyOrders());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (err) {
+      Toast(err, "error");
+    }
+  }, [err]);
+
+  if (loading) {
+    return (
+      <>
+        <Loader />
+        <MetaData title="Your Order" />
+      </>
+    );
+  } else {
+    return (
+      <div className="my-orders-container">
+        {orders && orders.map((order) => <Order order={order} />)}
+      </div>
+    );
+  }
+}
 
 export default MyOrders;
