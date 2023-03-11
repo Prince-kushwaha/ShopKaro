@@ -9,15 +9,19 @@ div.my-profile-container {
   margin: 10px 100px;
 }
 
-div.my-profile-box div.row {
+div.my-profile-box > div > div {
   padding: 10px;
+  margin: 0px;
+  display: grid;
+  grid-template-columns: 70px auto;
 }
 
 div.my-profile-box img {
   object-fit: contain;
   height: 60px;
+  width: 60px;
 }
 
 div.my-profile-box > div :hover {
-  background-color:  rgba(86, 247, 12, 0.861);
+  background-color: #e8e8e8;
 }

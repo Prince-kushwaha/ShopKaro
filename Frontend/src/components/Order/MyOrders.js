@@ -31,11 +31,7 @@ function Order({ order }) {
   }, []);
 
   if (!product) {
-    return (
-      <div class="spinner-border text-primary" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    );
+    return <h6>loading...</h6>;
   } else {
     return (
       <section className="order-card card mb-3" onClick={handleClickOnProduct}>

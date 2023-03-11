@@ -20,11 +20,11 @@ function Profile() {
           className="your-order-box card"
           onClick={() => navigator("/orders")}
         >
-          <div className="row">
-            <div className="col-6">
+          <div>
+            <div>
               <img src="https://m.media-amazon.com/images/G/31/x-locale/cs/ya/images/Box._CB485927553_.png"></img>
             </div>
-            <div className="col-6">
+            <div>
               <h6>Your Order</h6>
               <span class="a-color-secondary">
                 Track, return, or buy things again
@@ -33,26 +33,27 @@ function Profile() {
           </div>
         </div>
         <div className="your-login-box card">
-          <div className="row">
-            <div className="col-6">
+          <div>
+            <div>
               <img src="https://m.media-amazon.com/images/G/31/x-locale/cs/ya/images/sign-in-lock._CB485931504_.png"></img>
             </div>
-            <div className="col-6">
+            <div>
               <h6>Login & security</h6>
               <span class="a-color-secondary">Edit login ,name and mobile</span>
             </div>
           </div>
         </div>
-        <div className="your-addresses-box card" onClick={()=>navigator('/address')}>
-          <div className="row">
-            <div className="col-6">
+        <div
+          className="your-addresses-box card"
+          onClick={() => navigator("/address")}
+        >
+          <div>
+            <div>
               <img src="https://m.media-amazon.com/images/G/31/x-locale/cs/ya/images/address-map-pin._CB485934183_.png"></img>
             </div>
-            <div className="col-6">
+            <div>
               <h6>Your Addresses</h6>
-              <span class="a-color-secondary">
-                Edit,addresses for order and gifts
-              </span>
+              <span class="a-color-secondary">Edit addresses for order</span>
             </div>
           </div>
         </div>

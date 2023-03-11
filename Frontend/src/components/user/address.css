@@ -1,9 +1,15 @@
 div.create-address-box {
-  height: 200px;
-  width: 200px;
+  height: 266px;
+  width: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px dotted ;
 }
 
+div.address-content-box > .card-body > li {
+  list-style: none;
+}
+
+div.address-container-box {
+  margin: 4vmax;
+}
