@@ -6,7 +6,6 @@ ShopKaro Backend build using NodeJs, ExpressJs and MongoDB,Cloundinary
 <br>
 ShopKaro Fronted build using ReactJs,Redux,React-Material-Ui
 <br>
-Hosted [HERE](https://busy-pear-newt-tam.cyclic.app/)
 
 ![](github_assets/banner.png)
 
